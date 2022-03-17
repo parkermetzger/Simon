@@ -1,8 +1,7 @@
 int LENGTH = 400;
 int notes[4] = {100, 350, 600, 850};
 int gamepattern[30];
-int idle = 0;
-int last = 0;
+//int idle = 0;
 
 void setup() {
   pinMode(2, OUTPUT);
