@@ -11,6 +11,7 @@ void setup() {
   pinMode(7, INPUT);
   pinMode(8, INPUT);
   pinMode(9, INPUT);
+  pinMode(10, INPUT);
   Serial.begin(9600);
 }
 
@@ -23,11 +24,8 @@ void main_menu()
 {
   while (1 == 1)
   {
-    //if (idle == 0){play_note(1, 100);}
-    //if (idle == 1){play_note(2, 100);}
-    //if (idle == 2){play_note(3, 100);}
-    //if (idle == 3){play_note(4, 100);}
-    if ((digitalRead(6) == LOW) | (digitalRead(7) == LOW) | (digitalRead(8) == LOW) | (digitalRead(9) == LOW))
+    if ((digitalRead(6) == LOW) | (digitalRead(7) == LOW) | (digitalRead(8) == LOW) | (digitalRead(9) == LOW) | (digitalRead(10) == LOW))    //comment this out to use the game start button
+    //if ((digitalRead(10) == LOW)) //comment this out if you want any button to start the game
     {
       generate_game();
       play_game();
@@ -43,10 +41,6 @@ void play_game()
   int currentNote;
   int userInput = 0;
   bool loss = false;
-  //play_note(1, 100);
-  //play_note(2, 100);
-  //play_note(3, 100);
-  //play_note(4, 100);
   delay(5000);
   for (int currentRound=1; (currentRound - 1)<=(30); currentRound++)
     {
@@ -116,9 +110,6 @@ void game_over(bool win, int userInput) {
   }
   else {
     for (int i = 0; i < 1; i++){
-      //play_note(4, 100);
-      //play_note(3, 100);
-      //play_note(2, 100);
       play_note(userInput, 3000);
     }
   }
