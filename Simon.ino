@@ -16,7 +16,7 @@ void setup() {
 }
 
 void loop() {
-  for (int i=2; i<10; i++) {digitalWrite(i, HIGH);}
+  for (int i=2; i<11; i++) {digitalWrite(i, HIGH);}
   main_menu();
 }
 
@@ -24,8 +24,8 @@ void main_menu()
 {
   while (1 == 1)
   {
-    if ((digitalRead(6) == LOW) | (digitalRead(7) == LOW) | (digitalRead(8) == LOW) | (digitalRead(9) == LOW) | (digitalRead(10) == LOW))    //comment this out to use the game start button
-    //if ((digitalRead(10) == LOW)) //comment this out if you want any button to start the game
+    //if ((digitalRead(6) == LOW) | (digitalRead(7) == LOW) | (digitalRead(8) == LOW) | (digitalRead(9) == LOW) | (digitalRead(10) == LOW))    //comment this out to use the game start button
+    if ((digitalRead(10) == LOW)) //comment this out if you want any button to start the game
     {
       generate_game();
       play_game();
