@@ -1,18 +1,18 @@
-int LENGTH = 400;
-int notes[4] = {100, 350, 600, 850};
-int gamepattern[30];
+int LENGTH = 400;   //note length in ms
+int notes[4] = {100, 350, 600, 850};    //tones for each led
+int gamepattern[30];    //created random array
 
 void setup() {
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(6, INPUT);
-  pinMode(7, INPUT);
-  pinMode(8, INPUT);
-  pinMode(9, INPUT);
-  pinMode(10, INPUT);
-  Serial.begin(9600);
+  pinMode(2, OUTPUT);   //blue led
+  pinMode(3, OUTPUT);   //yellow led
+  pinMode(4, OUTPUT);   //green led
+  pinMode(5, OUTPUT);   //red led
+  pinMode(6, INPUT);    //blue button
+  pinMode(7, INPUT);    //yellow button
+  pinMode(8, INPUT);    //green button
+  pinMode(9, INPUT);    //red button
+  pinMode(10, INPUT);   //start game button
+  Serial.begin(9600);   //not used/for debugging
 }
 
 void loop() {
@@ -110,7 +110,7 @@ void game_over(bool win, int userInput) {
   }
   else {
     for (int i = 0; i < 1; i++){
-      play_note(userInput, 3000);
+      play_note(userInput, 1000);
     }
   }
   main_menu();
