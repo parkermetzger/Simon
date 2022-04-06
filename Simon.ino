@@ -12,7 +12,7 @@ void setup() {
   pinMode(7, INPUT);    //yellow button
   pinMode(8, INPUT);    //green button
   pinMode(9, INPUT);    //red button
-  pinMode(10, INPUT);   //start game button
+  pinMode(10, INPUT);   //start game button / reset button
   Serial.begin(9600);   //not used/for debugging
 }
 
@@ -42,7 +42,8 @@ void play_game()
   int currentNote;
   int userInput = 0;
   bool loss = false;
-  delay(5000);
+  delay(gamedelay * 10);
+  Serial.println("starting game");
   for (int currentRound=1; (currentRound - 1)<=(30); currentRound++)
     {
       roundCount += 1;
@@ -103,11 +104,29 @@ void generate_game() {
 }
 
 void play_note(int index, int notespeed) {
-  digitalWrite(index + 1, LOW);
-  tone(11, notes[ index - 1 ], notespeed);
-  delay(notespeed * 2);
-  digitalWrite(index + 1, HIGH);
-  delay(gamedelay);
+  Serial.println(index);
+  if (index < 5)  {
+    digitalWrite(index + 1, LOW);
+    tone(11, notes[ index - 1 ], notespeed);
+    delay(notespeed * 2);
+    digitalWrite(index + 1, HIGH);
+    delay(gamedelay);
+  }
+  else {
+    for (int i=0; i<5; i++) {
+      Serial.println("game over");
+      digitalWrite(2, LOW);
+      digitalWrite(3, LOW);
+      digitalWrite(4, LOW);
+      digitalWrite(5, LOW);
+      delay(gamedelay*2);
+      digitalWrite(2, HIGH);
+      digitalWrite(3, HIGH);
+      digitalWrite(4, HIGH);
+      digitalWrite(5, HIGH);
+      delay(gamedelay*2);
+    }
+  }
 }
 
 void game_over(bool win, int userInput) {
@@ -121,7 +140,7 @@ void game_over(bool win, int userInput) {
   }
   else {
     for (int i = 0; i < 1; i++){
-      play_note(userInput, 1000);
+      play_note(5, 1000);
     }
   }
   main_menu();
