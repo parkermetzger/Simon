@@ -1,6 +1,7 @@
 int LENGTH = 400;   //note length in ms
 int notes[4] = {100, 350, 600, 850};    //tones for each led
 int gamepattern[30];    //created random array
+int gamedelay = 100;  //delay in game between lights
 
 void setup() {
   pinMode(2, OUTPUT);   //blue led
@@ -81,6 +82,7 @@ void play_game()
     }
     buttonPress = false;
    }
+   delay(gamedelay);
   }
   if (loss == false){
     game_over(true,userInput);
@@ -89,7 +91,16 @@ void play_game()
 
 void generate_game() {
   randomSeed(analogRead(1));
-  for (int i=0; i<(30); i++) {gamepattern[i] = random(1, 5);}
+  for (int i=0; i<(30); i++) {
+    gamepattern[i] = random(1, 5);
+    //for (int i=0; i<(30); i++) {Serial.print(gamepattern[i]);}
+    //Serial.println("");
+  for (int i=0; i<(30); i++)  {
+    if (gamepattern[i] == gamepattern[i + 1] & gamepattern[i + 2]) {
+      gamepattern[i] = random(1, 5);
+    }
+  }
+}
 }
 
 void play_note(int index, int notespeed) {
